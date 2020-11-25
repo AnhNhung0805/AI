@@ -1,0 +1,26 @@
+import pyttsx3
+import speech_recognition as sr
+import time
+
+def noi(text):
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id) 
+    
+    engine.say(text)
+    engine.runAndWait()
+def nghe():    
+    r = sr.Recognizer()
+    print('Converting audio transcripts into text ...')
+    with sr.Microphone() as source:
+        audio_text = r.listen(source)
+        said=""       
+    # recoginize_() method will throw a request error if the API is unreachable, hence using exception handling
+        try:
+            print(' text ...')
+            said = r.recognize_google(audio_text)
+            print(said)
+
+        except Exception as e:
+             print('Sorry.. run again...' + str(e))
+    return said
